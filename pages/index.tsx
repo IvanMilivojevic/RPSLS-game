@@ -3,7 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
 import styles from "@/styles/Home.module.css";
-import type { Choices } from "./api/choices";
+import { Choices } from "@/types";
 
 interface HomePageProps {
   choices: Choices;
@@ -19,6 +19,16 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<HomePagePro
 }
 
 const Home = ({ choices }: HomePageProps) => {
+  const handleUserChoice = async (choiceId: number) => {
+    const response = await fetch("/api/play", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        player: choiceId,
+      }),
+    });
+  };
+
   return (
     <>
       <Head>
@@ -32,10 +42,15 @@ const Home = ({ choices }: HomePageProps) => {
 
         <div className={styles.center}>
           <div>
-            {choices.map(choice => {
-              return <div key={choice.id}>{choice.name}</div>;
+            {choices.map(({ id, name }) => {
+              return (
+                <div key={id} onClick={() => handleUserChoice(id)}>
+                  {name}
+                </div>
+              );
             })}
           </div>
+          <button>Play game</button>
         </div>
       </main>
     </>
