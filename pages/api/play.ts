@@ -1,7 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { Choices, Choice } from "@/types";
+import { Choices, Choice, PlayGameRequestBody, GameFinishedInfo } from "@/types";
+import { calculateGameResult } from "@/lib/utills";
 
-async function handlePlay(req: NextApiRequest, res: NextApiResponse) {
+async function handlePlay(req: NextApiRequest, res: NextApiResponse<GameFinishedInfo>) {
   const responseChoices = await fetch("http://localhost:3000/api/choices");
   const choices: Choices = await responseChoices.json();
 
@@ -9,10 +10,16 @@ async function handlePlay(req: NextApiRequest, res: NextApiResponse) {
   const { id: computerChoiceId, name: computerChoiceName }: Choice =
     await responseRandomChoice.json();
 
-  const { player: playerChoiceId } = req.body;
+  const { player: playerChoiceId }: PlayGameRequestBody = req.body;
   const { name: playerChoiceName } = choices.find(choice => choice.id === playerChoiceId)!;
 
-  res.status(200).json(choices);
+  const gameResult = calculateGameResult(playerChoiceName, computerChoiceName);
+
+  res.status(200).json({
+    results: gameResult,
+    player: playerChoiceId,
+    computer: computerChoiceId,
+  });
 }
 
 export default handlePlay;

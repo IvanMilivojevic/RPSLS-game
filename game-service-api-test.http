@@ -1,3 +1,6 @@
+// These requests can be used directly from VS Code if REST Client extension is installed
+// humao.rest-client (paste it inside Extensions tab search input)
+
 GET http://localhost:3000/api/choices
 
 ###
@@ -7,3 +10,10 @@ GET http://localhost:3000/api/choice
 ###
 
 GET http://localhost:3000/api/random
+
+###
+
+POST http://localhost:3000/api/play
+Content-Type: application/json
+
+{ "player": 2 }
