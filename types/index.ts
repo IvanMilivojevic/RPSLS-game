@@ -5,7 +5,16 @@ export type Choice = {
   name: ChoiceName;
 };
 
+export type ChoiceAdditional = {
+  displayName: string;
+  imgUrl: string;
+};
+
+export type ChoiceFullData = Choice & ChoiceAdditional;
+
 export type Choices = Choice[];
+
+export type ChoicesFullData = ChoiceFullData[];
 
 export type RandomNumber = {
   random_number: number;
