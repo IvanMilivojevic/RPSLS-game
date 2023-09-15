@@ -1,3 +1,4 @@
+import { readFile, writeFile } from "fs/promises";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Choices, Choice, PlayGameRequestBody, GameFinishedInfo } from "@/types";
 import { calculateGameResult } from "@/lib/utills";
@@ -15,11 +16,22 @@ async function handlePlay(req: NextApiRequest, res: NextApiResponse<GameFinished
 
   const gameResult = calculateGameResult(playerChoiceName, computerChoiceName);
 
-  res.status(200).json({
+  const gameFinishedInfo: GameFinishedInfo = {
     results: gameResult,
     player: playerChoiceId,
     computer: computerChoiceId,
-  });
+  };
+
+  try {
+    const rawResults = await readFile("content/results.json");
+    const results: GameFinishedInfo[] = JSON.parse(rawResults.toString());
+    results.unshift(gameFinishedInfo);
+    await writeFile("content/results.json", JSON.stringify(results));
+  } catch (error) {
+    await writeFile("content/results.json", JSON.stringify([gameFinishedInfo]));
+  }
+
+  res.status(200).json(gameFinishedInfo);
 }
 
 export default handlePlay;

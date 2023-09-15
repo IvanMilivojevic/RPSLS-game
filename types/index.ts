@@ -31,3 +31,12 @@ export type GameFinishedInfo = {
   player: number;
   computer: number;
 };
+
+export type GameFinishedAdditional = {
+  playerChoiceName: string;
+  computerChoiceName: string;
+};
+
+export type GameResultData = GameFinishedInfo & GameFinishedAdditional;
+
+export type GameResultsFullData = GameResultData[];

@@ -5,7 +5,7 @@ import { Inter } from "next/font/google";
 import { useState, useCallback } from "react";
 import { Choices, ChoicesFullData, ChoiceFullData, GameFinishedInfo } from "@/types";
 import { capitalizeFirstLetter } from "@/lib/utills";
-import styles from "@/styles/Home.module.css";
+import styles from "@/styles/HomePage.module.css";
 
 interface HomePageProps {
   choices: ChoicesFullData;
@@ -26,7 +26,7 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<HomePagePro
   return { props: { choices: choicesData } };
 }
 
-const Home = ({ choices }: HomePageProps) => {
+const HomePage = ({ choices }: HomePageProps) => {
   const [gameFinishedInfo, setGameFinishedInfo] = useState<GameFinishedInfo>();
   const [userChoice, setUserChoice] = useState<number>();
   const [computerChoice, setComputerChoice] = useState<ChoiceFullData>();
@@ -111,4 +111,4 @@ const Home = ({ choices }: HomePageProps) => {
   );
 };
 
-export default Home;
+export default HomePage;
