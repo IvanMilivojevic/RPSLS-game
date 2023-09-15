@@ -5,6 +5,14 @@ No additional packages/libraries are used, except Prettier for code formatting.
 
 ## Running the Project
 
+To install dependencies and prepare project
+
+```bash
+npm install
+# or
+yarn install
+```
+
 To run the development server:
 
 ```bash
@@ -19,10 +27,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ## Setup requirements, development/testing environment
 
-Tested/developed on Windows 11
-Node 18.16.0
-git version 2.40.1.windows.1
-IDE - Visual Studio Code 1.78.2
+- Tested/developed on Windows 11
+- Node 18.16.0
+- git version 2.40.1.windows.1
+- IDE - Visual Studio Code 1.78.2
 
 Several extensions can be installed to help with development, testing and checking for errors
 
@@ -30,7 +38,7 @@ Several extensions can be installed to help with development, testing and checki
 - GitLens
 - Import Cost
 - Prettier
-- REST Client (this one is good for testing API endpoints, and game-service-api-test.http file has all used endpoints)
+- REST Client (this one is good for testing API endpoints instead of Postman or similar and game-service-api-test.http file has all endpoints used for game services)
 
 ## Additional improvements
 
