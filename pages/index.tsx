@@ -2,7 +2,7 @@ import { GetStaticPropsResult } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { Inter } from "next/font/google";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { Choices, ChoicesFullData, ChoiceFullData, GameFinishedInfo } from "@/types";
 import { capitalizeFirstLetter } from "@/lib/utills";
 import styles from "@/styles/Home.module.css";
@@ -27,11 +27,11 @@ export async function getStaticProps(): Promise<GetStaticPropsResult<HomePagePro
 }
 
 const Home = ({ choices }: HomePageProps) => {
-  const [gameFinishedInfo, setGameFinishedInfo] = useState<GameFinishedInfo | null>(null);
+  const [gameFinishedInfo, setGameFinishedInfo] = useState<GameFinishedInfo>();
   const [userChoice, setUserChoice] = useState<number>();
   const [computerChoice, setComputerChoice] = useState<ChoiceFullData>();
 
-  const playGame = async () => {
+  const playGame = useCallback(async () => {
     const response = await fetch("/api/play", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -45,7 +45,7 @@ const Home = ({ choices }: HomePageProps) => {
 
     setGameFinishedInfo(gameFinishedInfo);
     setComputerChoice(computerChoice);
-  };
+  }, [choices, userChoice]);
 
   return (
     <>
@@ -56,8 +56,6 @@ const Home = ({ choices }: HomePageProps) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <div className={styles.description}></div>
-
         <div className={styles.center}>
           <div className={styles.choicesList}>
             {choices.map(({ id, name, displayName, imgUrl }) => {
