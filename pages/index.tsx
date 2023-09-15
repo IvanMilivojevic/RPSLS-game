@@ -1,7 +1,6 @@
 import { GetStaticPropsResult } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { Inter } from "next/font/google";
 import { useState, useCallback } from "react";
 import { Choices, ChoicesFullData, ChoiceFullData, GameFinishedInfo } from "@/types";
 import { capitalizeFirstLetter } from "@/lib/utills";
@@ -10,8 +9,6 @@ import styles from "@/styles/HomePage.module.css";
 interface HomePageProps {
   choices: ChoicesFullData;
 }
-
-const inter = Inter({ subsets: ["latin"] });
 
 export async function getStaticProps(): Promise<GetStaticPropsResult<HomePageProps>> {
   const response = await fetch("http://localhost:3000/api/choices");
@@ -65,7 +62,7 @@ const HomePage = ({ choices }: HomePageProps) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={`${styles.main} ${inter.className}`}>
+      <main className={styles.main}>
         <div className={styles.center}>
           <div className={styles.choicesList}>
             <h4 className={styles.choicesTitle}>Player</h4>

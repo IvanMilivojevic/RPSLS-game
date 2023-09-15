@@ -1,8 +1,11 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Project also includes TypeScript and ESLint - enabled during project initialization/bootstrapping.
 
-## Getting Started
+No additional packages/libraries are used, except Prettier for code formatting.
 
-First, run the development server:
+## Running the Project
+
+To run the development server:
 
 ```bash
 npm run dev
@@ -12,27 +15,40 @@ yarn dev
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the project and play a game.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Setup requirements, development/testing environment
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+Tested/developed on Windows 11
+Node 18.16.0
+git version 2.40.1.windows.1
+IDE - Visual Studio Code 1.78.2
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Several extensions can be installed to help with development, testing and checking for errors
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- ESLint
+- GitLens
+- Import Cost
+- Prettier
+- REST Client (this one is good for testing API endpoints, and game-service-api-test.http file has all used endpoints)
 
-## Learn More
+## Additional improvements
 
-To learn more about Next.js, take a look at the following resources:
+### Multiuser implementation
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+This can be implemented by using a Register/Login form on the frontend side. After user is registered, we can remember user in a JSON file on server (simulating some database).
+After that we can provide back the generated ID which is unique for that user (it can be stored in a cookie on frontend side). After sending each request to the backend like
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Playing a game and sending a payload with user choice, we can read cookie and based on ID/token write the result to a specific user-related results data
+- Sending request for getting back results for displaying scoreboard - we can read cookie and return back appropriate results only for that user
 
-## Deploy on Vercel
+In general this logic should be of course implemented with some regular database, but JSON can be implemented for this purpose. It follows a structure for results like this:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- JSON file is an object
+- Each Key is ID of a user and this key/ID has a value which is an array of results (same as implemented content/results.json) just specific for a user who played the game
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Refactors
+
+- Many components on the frontend side, could be further optimized and split into some smaller, more reusable components.
+- We can use .env variables for keeping the URLs of endpoints inside (internal and external alike)
+- Some hardcoded strings can be placed inside of constants so that they can be easier changed later on (game logic function for example)

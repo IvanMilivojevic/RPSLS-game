@@ -13,6 +13,10 @@ GET http://localhost:3000/api/random
 
 ###
 
+GET https://codechallenge.boohma.com/random
+
+###
+
 POST http://localhost:3000/api/play
 Content-Type: application/json
 
