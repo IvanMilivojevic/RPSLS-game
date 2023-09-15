@@ -6,6 +6,7 @@ export const calculateGameResult = (
 ) => {
   let gameResult: GameResult;
 
+  // We could add ENUM and replace all hardcoded strings also
   switch (playerChoiceName) {
     case "rock":
       if (computerChoiceName === "lizard" || computerChoiceName === "scissors") {

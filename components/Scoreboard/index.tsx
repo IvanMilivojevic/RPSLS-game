@@ -16,6 +16,8 @@ const Scoreboard = ({ results }: IScoreboardProps) => {
         method: "DELETE",
       });
 
+      // A solution to revalidate server props https://stackoverflow.com/a/75650798
+      // Needed so that when we delete records we instantly want to show empty records
       router.replace(router.asPath);
     } catch (error) {
       console.log(error);

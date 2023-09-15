@@ -40,6 +40,11 @@
   transform: scale(1.05);
 }
 
+.choicesTitle {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
 .choiceTitle {
   padding: 5px;
 }
@@ -61,6 +66,7 @@
   border-radius: 8px;
   padding: 10px 20px;
   cursor: pointer;
+  min-width: 110px;
 }
 
 .playButton:disabled {
@@ -93,4 +99,16 @@
   font-size: 40px;
   font-weight: bold;
   margin: 70px 0;
+}
+
+@media (max-width: 567px) {
+  .main {
+    padding: 20px 10px;
+  }
+  .center {
+    padding: 10px 0;
+  }
+  .infoColumn {
+    padding: 0 4px;
+  }
 }

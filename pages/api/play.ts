@@ -7,9 +7,19 @@ async function handlePlay(req: NextApiRequest, res: NextApiResponse<GameFinished
   const responseChoices = await fetch("http://localhost:3000/api/choices");
   const choices: Choices = await responseChoices.json();
 
-  const responseRandomChoice = await fetch("http://localhost:3000/api/choice");
-  const { id: computerChoiceId, name: computerChoiceName }: Choice =
-    await responseRandomChoice.json();
+  let computerChoice: Choice;
+
+  try {
+    const responseRandomChoice = await fetch("http://localhost:3000/api/choice");
+    const randomChoice: Choice = await responseRandomChoice.json();
+
+    computerChoice = randomChoice;
+  } catch (error) {
+    res.status(500).end();
+    return;
+  }
+
+  const { id: computerChoiceId, name: computerChoiceName } = computerChoice;
 
   const { player: playerChoiceId }: PlayGameRequestBody = req.body;
   const { name: playerChoiceName } = choices.find(choice => choice.id === playerChoiceId)!;

@@ -5,3 +5,9 @@
   padding: 6rem;
   min-height: 100vh;
 }
+
+@media (max-width: 567px) {
+  .main {
+    padding: 20px 10px;
+  }
+}
