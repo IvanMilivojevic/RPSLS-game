@@ -1,9 +1,15 @@
-import { readFile } from "fs/promises";
+import { readFile, unlink } from "fs/promises";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { Choices, GameFinishedInfo, GameResultsFullData } from "@/types";
 import { capitalizeFirstLetter } from "@/lib/utills";
 
 async function handleResults(req: NextApiRequest, res: NextApiResponse) {
+  if (req.method === "DELETE") {
+    await unlink("content/results.json");
+    res.status(200).end();
+    return;
+  }
+
   const responseChoices = await fetch("http://localhost:3000/api/choices");
   const choices: Choices = await responseChoices.json();
 

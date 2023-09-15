@@ -17,3 +17,11 @@ POST http://localhost:3000/api/play
 Content-Type: application/json
 
 { "player": 2 }
+
+###
+
+GET http://localhost:3000/api/results
+
+###
+
+DELETE http://localhost:3000/api/results

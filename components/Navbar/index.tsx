@@ -13,9 +13,6 @@ const Navbar = () => {
       <li className={pathname == "/scoreboard" ? styles.active : ""}>
         <Link href="/scoreboard">SCOREBOARD</Link>
       </li>
-      <li className={pathname == "/login" ? styles.active : ""}>
-        <Link href="/login">LOGIN</Link>
-      </li>
     </ul>
   );
 };

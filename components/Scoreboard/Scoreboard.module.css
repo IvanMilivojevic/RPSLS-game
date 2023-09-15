@@ -28,14 +28,17 @@
 
 .bodyRow span.success {
   background-color: green;
+  color: #fff;
 }
 
 .bodyRow span.fail {
   background-color: red;
+  color: #fff;
 }
 
 .bodyRow span.equal {
   background-color: orange;
+  color: #fff;
 }
 
 .bodyRow span {
@@ -46,4 +49,17 @@
 .heading span:not(:last-child),
 .bodyRow span:not(:last-child) {
   border-right: 1px solid #000;
+}
+
+.tableReset {
+  margin-top: 20px;
+}
+
+.tableReset button {
+  padding: 10px 30px;
+  appearance: none;
+  border: 2px solid #3e0000;
+  background-color: #3e0000;
+  color: #fff;
+  cursor: pointer;
 }
